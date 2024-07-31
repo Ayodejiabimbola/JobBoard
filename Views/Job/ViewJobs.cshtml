@@ -1,0 +1,26 @@
+@model List<Job>
+
+@{
+    ViewData["Title"] = "View Jobs";
+}
+
+<h1>Job Openings</h1>
+<div>
+    <ul>
+        @foreach (var job in Model)
+        {
+            <li>
+                <h4>
+                    <a href="@Url.Action("JobDetails", "Job", new { Id = job.Id })" class="nav-link link-body-emphasis px-2">
+                        @job.JobName
+                    </a>
+                </h4>
+                @if (!string.IsNullOrEmpty(job.PictureUrl))
+                {
+                    <img src="@Url.Content(job.PictureUrl)" alt="@job.JobName Image" class="job-image" />
+                }
+                <p>@job.JobDescription.Substring(0, 150)...</p>
+            </li>
+        }
+    </ul>
+</div>
