@@ -13,6 +13,42 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\cybersecurity_analyst.jpeg",
+      "PackagePath": "staticwebassets\\images\\cybersecurity_analyst.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\data_analyst.jpeg",
+      "PackagePath": "staticwebassets\\images\\data_analyst.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\database_administrator.jpeg",
+      "PackagePath": "staticwebassets\\images\\database_administrator.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\it_support_specialist.jpeg",
+      "PackagePath": "staticwebassets\\images\\it_support_specialist.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\network_engineer.jpeg",
+      "PackagePath": "staticwebassets\\images\\network_engineer.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\project_manager.jpeg",
+      "PackagePath": "staticwebassets\\images\\project_manager.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\software_developer.jpeg",
+      "PackagePath": "staticwebassets\\images\\software_developer.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\systems_administrator.jpeg",
+      "PackagePath": "staticwebassets\\images\\systems_administrator.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\web_developer.jpeg",
+      "PackagePath": "staticwebassets\\images\\web_developer.jpeg"
+    },
+    {
       "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

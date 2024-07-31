@@ -134,3 +134,4 @@ C:\Users\HP\Desktop\JobBoard\obj\Debug\net8.0\refint\JobBoard.dll
 C:\Users\HP\Desktop\JobBoard\obj\Debug\net8.0\JobBoard.pdb
 C:\Users\HP\Desktop\JobBoard\obj\Debug\net8.0\JobBoard.genruntimeconfig.cache
 C:\Users\HP\Desktop\JobBoard\obj\Debug\net8.0\ref\JobBoard.dll
+C:\Users\HP\Desktop\JobBoard\obj\Debug\net8.0\JobBoard.sourcelink.json
