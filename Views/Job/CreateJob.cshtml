@@ -1,0 +1,30 @@
+@model JobBoard.Models.Job.CreateJobViewModel
+
+@{
+    ViewData["Title"] = "Add New Job";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr>
+<h5>Add New Job</h5>
+<form asp-action="CreateJob">
+
+    <div class="mb-3">
+        <label asp-for="JobName" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="JobName">
+        <span asp-validation-for="JobName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="JobDescription" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="JobDescription">
+        <span asp-validation-for="JobDescription" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PictureUrl" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="PictureUrl">
+        <span asp-validation-for="PictureUrl" class="text-danger"></span>
+    </div>
+    <button style="width:auto" type="submit" class="btn btn-success">Add Job</button>
+</form>
