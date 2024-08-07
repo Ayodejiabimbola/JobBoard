@@ -16,10 +16,11 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="JobDescription" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="JobDescription">
-        <span asp-validation-for="JobDescription" class="text-danger"></span>
-    </div>
+    <label asp-for="JobDescription" class="form-label"></label>
+    <textarea asp-for="JobDescription" class="form-control"></textarea>
+    <span asp-validation-for="JobDescription" class="text-danger"></span>
+</div>
+
 
     <div class="mb-3">
         <label asp-for="PictureUrl" class="form-label"></label>

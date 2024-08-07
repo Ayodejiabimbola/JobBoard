@@ -10,8 +10,8 @@ public class Applicant : BaseEntity
     public Gender Gender { get; set; } = default!;
     public int JobId { get; set; }
     public Job Job { get; set; } = default!;
-    public string? CVPath { get; set; } 
-    public string? CoverLetterPath { get; set; }
+    public string CVPath { get; set; } = default!;
+    public string CoverLetterPath { get; set; } = default!;
     public string UserId { get; internal set; } = default!;
-    public ApplicationStatus ApplicationStatus { get; set; } = default!;
+    public ApplicationStatus ApplicationStatus { get; set; } = ApplicationStatus.Submitted;
 }

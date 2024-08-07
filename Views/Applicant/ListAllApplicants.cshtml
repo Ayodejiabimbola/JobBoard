@@ -1,0 +1,39 @@
+@model List<JobBoard.Data.Applicant>
+
+@{
+    ViewData["Title"] = "All Applicants";
+}
+
+<h1>All Applicants</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Application Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var applicant in Model)
+        {
+            <tr>
+                <td>@applicant.FullName</td>
+                <td>@applicant.Email</td>
+                <td>@applicant.PhoneNumber</td>
+                <td>@applicant.DOB.ToString("dd/MM/yyyy")  </td>
+                <td>@applicant.Gender</td>
+                <td>@applicant.ApplicationStatus</td>
+                  <td>
+                    <a asp-action="Edit" asp-route-id="@applicant.Id" class="btn btn-primary">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@applicant.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

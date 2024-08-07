@@ -281,6 +281,22 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\OHSC ASSIGNMENT COVERSHEET.doc_xmvugod4.auk.doc",
+      "PackagePath": "staticwebassets\\uploads\\OHSC ASSIGNMENT COVERSHEET.doc_xmvugod4.auk.doc"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Of course_dywresl5.vg1.docx",
+      "PackagePath": "staticwebassets\\uploads\\Of course_dywresl5.vg1.docx"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Of course_emr4554g.4c3.docx",
+      "PackagePath": "staticwebassets\\uploads\\Of course_emr4554g.4c3.docx"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Portal Guide_2rexdihk.svj.pdf",
+      "PackagePath": "staticwebassets\\uploads\\Portal Guide_2rexdihk.svj.pdf"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.JobBoard.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

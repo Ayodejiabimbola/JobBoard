@@ -19,21 +19,6 @@ namespace JobBoard.Migrations
                 .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ApplicationStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ApplicationStatuses");
-                });
-
             modelBuilder.Entity("Job", b =>
                 {
                     b.Property<int>("Id")
@@ -63,13 +48,15 @@ namespace JobBoard.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ApplicationStatusId")
+                    b.Property<int>("ApplicationStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("CVPath")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("CoverLetterPath")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("DOB")
@@ -98,8 +85,6 @@ namespace JobBoard.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationStatusId");
 
                     b.HasIndex("JobId");
 
@@ -300,19 +285,11 @@ namespace JobBoard.Migrations
 
             modelBuilder.Entity("JobBoard.Data.Applicant", b =>
                 {
-                    b.HasOne("ApplicationStatus", "ApplicationStatus")
-                        .WithMany()
-                        .HasForeignKey("ApplicationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Job", "Job")
                         .WithMany()
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ApplicationStatus");
 
                     b.Navigation("Job");
                 });

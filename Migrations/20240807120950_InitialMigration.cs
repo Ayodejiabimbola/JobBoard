@@ -16,20 +16,6 @@ namespace JobBoard.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "ApplicationStatuses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Status = table.Column<string>(type: "longtext", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApplicationStatuses", x => x.Id);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -209,20 +195,14 @@ namespace JobBoard.Migrations
                     DOB = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     JobId = table.Column<int>(type: "int", nullable: false),
-                    CVPath = table.Column<string>(type: "longtext", nullable: true),
-                    CoverLetterPath = table.Column<string>(type: "longtext", nullable: true),
+                    CVPath = table.Column<string>(type: "longtext", nullable: false),
+                    CoverLetterPath = table.Column<string>(type: "longtext", nullable: false),
                     UserId = table.Column<string>(type: "longtext", nullable: false),
-                    ApplicationStatusId = table.Column<int>(type: "int", nullable: false)
+                    ApplicationStatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Applicants", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Applicants_ApplicationStatuses_ApplicationStatusId",
-                        column: x => x.ApplicationStatusId,
-                        principalTable: "ApplicationStatuses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Applicants_Jobs_JobId",
                         column: x => x.JobId,
@@ -231,11 +211,6 @@ namespace JobBoard.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Applicants_ApplicationStatusId",
-                table: "Applicants",
-                column: "ApplicationStatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applicants_JobId",
@@ -300,9 +275,6 @@ namespace JobBoard.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "ApplicationStatuses");
 
             migrationBuilder.DropTable(
                 name: "Jobs");

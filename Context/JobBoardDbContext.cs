@@ -14,5 +14,4 @@ public class JobBoardDbContext(DbContextOptions<JobBoardDbContext> options) : Id
     }
     public DbSet<Applicant> Applicants { get; set; }
     public DbSet<Job> Jobs { get; set; }
-    public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
 }
