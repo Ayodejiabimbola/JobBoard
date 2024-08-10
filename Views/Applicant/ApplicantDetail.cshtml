@@ -1,0 +1,40 @@
+@model JobBoard.Models.Applicant.ApplicantDetailViewModel
+
+@{
+    ViewData["Title"] = "Applicant Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div class="ApplicantDetail">
+
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label"></label>
+        <output type="text" class="form-control" asp-for="FirstName">@Model.FullName</output>
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <output type="email" class="form-control" asp-for="Email">@Model.Email</output>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        
+        <div class="mb-3">
+            <label asp-for="PhoneNumber" class="form-label"></label>
+            <output type="text" class="form-control" asp-for="PhoneNumber">@Model.PhoneNumber</output>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        
+        <div class="mb-3">
+            <label asp-for="Gender" class="form-label"></label>
+            <output type="text" class="form-control" asp-for="Gender">@Model.Gender</output>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+</div>
+<div>
+    <button><a asp-action="EditApplicantDetail" asp-controller="Applicant">Edit Details</Details></a></button>
+    <button><a asp-action="DeleteApplicantDetail" asp-controller="Applicant">Delete Details</a></button>
+</div>

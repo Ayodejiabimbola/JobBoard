@@ -73,7 +73,7 @@ public class ApplicantController(
 
         if (model.CV != null && model.CV.Length > 0)
         {
-            if (model.CV.Length > 1024 * 1024) 
+            if (model.CV.Length > 1024 * 1024)
             {
                 ModelState.AddModelError("CV", "CV file size should not exceed 1MB.");
                 return View(model);
@@ -101,7 +101,7 @@ public class ApplicantController(
 
         if (model.CoverLetter != null && model.CoverLetter.Length > 0)
         {
-            if (model.CoverLetter.Length > 1024 * 1024) 
+            if (model.CoverLetter.Length > 1024 * 1024)
             {
                 ModelState.AddModelError("CoverLetter", "Cover letter file size should not exceed 1MB.");
                 return View(model);
@@ -137,5 +137,115 @@ public class ApplicantController(
 
         _notyfService.Error("An error occurred during application");
         return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ApplicantDetail(int id)
+    {
+        var user = await _userManager.GetUserAsync(User);
+
+        var applicant = await _jobBoardDbContext.Applicants
+            .FirstOrDefaultAsync(m => m.UserId == user!.Id);
+
+
+        if (applicant != null)
+        {
+            var applicantDetailViewModel = new ApplicantDetailViewModel
+            {
+                FullName = applicant.FullName,
+                Email = applicant.Email,
+                PhoneNumber = applicant.PhoneNumber,
+                Gender = applicant.Gender,
+            };
+
+            return View(applicantDetailViewModel);
+        }
+        else
+        {
+            _notyfService.Error("Applicant details not found");
+            return RedirectToAction("ApplicantDetail", "Applicant");
+        }
+    }
+
+   private async Task<Applicant?> GetCurrentApplicant()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return null;
+        }
+
+        return await _jobBoardDbContext.Applicants
+            .FirstOrDefaultAsync(a => a.UserId == user.Id);
+    }
+
+    public async Task<IActionResult> EditApplicantDetailAsync()
+    {
+        var applicant = await GetCurrentApplicant();
+        if (applicant == null)
+        {
+            return NotFound();
+        }
+
+        var model = new EditApplicantDetailViewModel
+        {
+            FullName = applicant.FullName,
+            Email = applicant.Email,
+            PhoneNumber = applicant.PhoneNumber,
+            Gender = applicant.Gender,
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditApplicantDetailAsync(EditApplicantDetailViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var applicant = await GetCurrentApplicant();
+            if (applicant == null)
+            {
+                return NotFound();
+            }
+
+            applicant.FullName = model.FullName;
+            applicant.Email = model.Email;
+            applicant.PhoneNumber = model.PhoneNumber;
+            applicant.Gender = model.Gender;
+
+            _jobBoardDbContext.Update(applicant);
+            await _jobBoardDbContext.SaveChangesAsync();
+
+            _notyfService.Success("Applicant details updated successfully");
+            return RedirectToAction("ApplicantDetail", "Applicant");
+        }
+
+        _notyfService.Error("An error occurred while updating details");
+        return View(model);
+    }
+    public async Task<IActionResult> DeleteApplicantDetail(int id)
+    {
+        var applicant = await _jobBoardDbContext.Applicants.FindAsync(id);
+        if (applicant == null)
+        {
+            return NotFound();
+        }
+
+        return View(applicant);
+    }
+    [HttpPost, ActionName("Delete")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var applicant = await _jobBoardDbContext.Applicants.FindAsync(id);
+        if (applicant == null)
+        {
+            return NotFound();
+        }
+
+        _jobBoardDbContext.Applicants.Remove(applicant);
+        await _jobBoardDbContext.SaveChangesAsync();
+
+        return RedirectToAction("ListAllApplicants", "Applicant");
     }
 }
