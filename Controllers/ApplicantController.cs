@@ -224,7 +224,7 @@ public class ApplicantController(
         _notyfService.Error("An error occurred while updating details");
         return View(model);
     }
-    public async Task<IActionResult> DeleteApplicantDetail(int id)
+    public async Task<IActionResult> DeleteApplicantAsync(int id)
     {
         var applicant = await _jobBoardDbContext.Applicants.FindAsync(id);
         if (applicant == null)

@@ -1,0 +1,19 @@
+@model JobBoard.Models.Applicant.DeleteApplicantViewModel
+
+@{
+    ViewData["Title"] = "Delete Applicant";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div>
+    <h4>Confirm Deletion</h4>
+    <p>Are you sure you want to delete this Applicant?</p>
+    <form asp-action="DeleteApplicant" asp-controller="Applicant" method="post">
+        <div>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="ListAllApplicants" asp-controller="Applicant" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
