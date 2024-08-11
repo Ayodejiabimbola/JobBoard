@@ -1,7 +1,9 @@
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using JobBoard.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,11 +24,24 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opt =>
 .AddEntityFrameworkStores<JobBoardDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.AddMvc(options => {
+    var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+}).AddXmlSerializerFormatters();
+
+
 builder.Services.AddNotyf(config =>
 {
     config.DurationInSeconds = 7;
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Auth/Login";
 });
 
 builder.Services.AddControllersWithViews();

@@ -3,11 +3,13 @@ using JobBoard.Context;
 using JobBoard.Data;
 using JobBoard.Models.Applicant;
 using JobBoard.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
+[Authorize]
 public class ApplicantController(
     UserManager<IdentityUser> userManager,
     SignInManager<IdentityUser> signInManager,
@@ -132,7 +134,7 @@ public class ApplicantController(
         if (result > 0)
         {
             _notyfService.Success("Details submitted successfully");
-            return RedirectToAction("ListAllApplicants", "Applicant");
+            return RedirectToAction("Index", "Home");
         }
 
         _notyfService.Error("An error occurred during application");

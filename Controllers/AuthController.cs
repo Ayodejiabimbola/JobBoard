@@ -25,12 +25,14 @@ public class AuthController(
 
 
     [RedirectAuthenticatedUsers]
+    [AllowAnonymous]
     public IActionResult Login()
     {
         return View();
     }
 
     [HttpPost("/Auth/Login")]
+    [AllowAnonymous]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
         if (ModelState.IsValid)
@@ -39,7 +41,7 @@ public class AuthController(
 
             if (user != null)
             {
-                var result = await _signInManager.PasswordSignInAsync(user.UserName!, model.Password, false, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(user.UserName!, model.Password, model.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
@@ -47,14 +49,12 @@ public class AuthController(
                     var applicant = await _jobBoardDbContext.Applicants.AnyAsync(x => x.UserId == userDetails.userId);
 
                     var redirectResult = applicant ? RedirectToAction("Index", "Home") : RedirectToAction("AddApplicant", "Applicant");
-
+                    
                     _notyfService.Success("Login succesful");
                     return redirectResult;
                 }
 
             }
-
-            ModelState.AddModelError("", "Invalid login attempt");
             _notyfService.Error("Invalid login attempt");
             return View(model);
         }
@@ -63,12 +63,14 @@ public class AuthController(
     }
 
     [RedirectAuthenticatedUsers]
+    [AllowAnonymous]
     public IActionResult Register()
     {
         return View();
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
         if (ModelState.IsValid)
@@ -97,12 +99,13 @@ public class AuthController(
 
             _notyfService.Success("Registration was successful");
             await _signInManager.SignInAsync(user, isPersistent: false);
-            return RedirectToAction("Login", "Auth");
+            return RedirectToAction("Index", "Home");
         }
 
         return View(model);
     }
 
+    [HttpPost]
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();

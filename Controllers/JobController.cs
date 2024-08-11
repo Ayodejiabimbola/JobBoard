@@ -1,10 +1,12 @@
 using AspNetCoreHero.ToastNotification.Abstractions;
 using JobBoard.Context;
 using JobBoard.Models.Job;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+[Authorize]
 public class JobController(UserManager<IdentityUser> userManager,
 SignInManager<IdentityUser> signInManager,
 INotyfService notyf,
@@ -17,10 +19,12 @@ IHttpContextAccessor httpContextAccessor) : Controller
     private readonly JobBoardDbContext _jobBoardDbContext = jobBoardDbContext;
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
+    [AllowAnonymous]
     public async Task<IActionResult> ViewJobs()
     {
         return View(await _jobBoardDbContext.Jobs.ToListAsync());
     }
+    [AllowAnonymous]
     public async Task<IActionResult> JobDetails(int? id)
     {
         var job = await _jobBoardDbContext.Jobs.FindAsync(id);
