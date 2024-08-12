@@ -1,0 +1,12 @@
+@model JobApplicationStatusViewModel
+@{
+    ViewData["Title"] = "Job Application Status";
+}
+
+<h1>Job Application Status</h1>
+
+<div>
+    <p><strong>Full Name:</strong> @Model.FullName</p>
+    <p><strong>Applied For:</strong> @Model.JobName</p>
+    <p><strong>Status:</strong>@Model.ApplicationStatus </p>
+</div>

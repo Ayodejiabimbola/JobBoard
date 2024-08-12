@@ -142,7 +142,7 @@ public class ApplicantController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> ApplicantDetail(int id)
+    public async Task<IActionResult> ApplicantDetail()
     {
         var user = await _userManager.GetUserAsync(User);
 
@@ -169,7 +169,7 @@ public class ApplicantController(
         }
     }
 
-   private async Task<Applicant?> GetCurrentApplicant()
+    private async Task<Applicant?> GetCurrentApplicant()
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
@@ -249,5 +249,49 @@ public class ApplicantController(
         await _jobBoardDbContext.SaveChangesAsync();
 
         return RedirectToAction("ListAllApplicants", "Applicant");
+    }
+    // public async Task<IActionResult> JobApplicationStatus()
+    // {
+    //     var applicant = await GetCurrentApplicant();
+    //     if (applicant == null)
+    //     {
+    //         return NotFound();
+    //     }
+
+    //     var model = new JobApplicationStatusViewModel
+    //     {
+    //         FullName = applicant.FullName,
+    //         JobName = applicant.Job.JobName,
+    //         ApplicationStatus = applicant.ApplicationStatus
+    //     };
+
+    //         return View(model);
+
+    // }
+
+    public async Task<IActionResult> JobApplicationStatus(int id)
+    {
+        var applicant = await _jobBoardDbContext.Applicants
+            .Include(a => a.Job)  
+            .FirstOrDefaultAsync(a => a.Id == id);
+
+        if (applicant == null)
+        {
+            return NotFound();
+        }
+
+        if (applicant.Job == null)
+        {
+            return BadRequest("Job information is missing for the applicant.");
+        }
+
+        var model = new JobApplicationStatusViewModel
+        {
+            FullName = applicant.FullName,
+            JobName = applicant.Job.JobName,
+            ApplicationStatus = applicant.ApplicationStatus
+        };
+
+        return View(model);
     }
 }

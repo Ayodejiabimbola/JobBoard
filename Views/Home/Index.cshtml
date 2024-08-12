@@ -1,1 +1,33 @@
-﻿
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage with Bootstrap Menu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Offcanvas Button -->
+    <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+        <i class="fas fa-bars"></i> Menu
+    </button>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li><a href="@Url.Action("ApplicantDetail", "Applicant")" class="nav-link link-body-emphasis px-2">Profile</a></li>
+                <li><a href="@Url.Action("JobApplicationStatus", "Applicant")" asp-route-id="id" class="nav-link link-body-emphasis px-2">Application Status</a></li>
+                <li><a href="#item3" class="btn btn-link">My Documents </a></li>
+                <li><a href="#item4" class="btn btn-link"></a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
