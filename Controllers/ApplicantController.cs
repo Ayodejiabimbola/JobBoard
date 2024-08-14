@@ -250,30 +250,14 @@ public class ApplicantController(
 
         return RedirectToAction("ListAllApplicants", "Applicant");
     }
-    // public async Task<IActionResult> JobApplicationStatus()
-    // {
-    //     var applicant = await GetCurrentApplicant();
-    //     if (applicant == null)
-    //     {
-    //         return NotFound();
-    //     }
 
-    //     var model = new JobApplicationStatusViewModel
-    //     {
-    //         FullName = applicant.FullName,
-    //         JobName = applicant.Job.JobName,
-    //         ApplicationStatus = applicant.ApplicationStatus
-    //     };
-
-    //         return View(model);
-
-    // }
-
-    public async Task<IActionResult> JobApplicationStatus(int id)
+    public async Task<IActionResult> JobApplicationStatus()
     {
+        var currentUserId = _userManager.GetUserId(User);
+
         var applicant = await _jobBoardDbContext.Applicants
-            .Include(a => a.Job)  
-            .FirstOrDefaultAsync(a => a.Id == id);
+            .Include(a => a.Job)
+            .FirstOrDefaultAsync(a => a.UserId == currentUserId);
 
         if (applicant == null)
         {
@@ -282,14 +266,16 @@ public class ApplicantController(
 
         if (applicant.Job == null)
         {
-            return BadRequest("Job information is missing for the applicant.");
+            throw new NullReferenceException("The Job property is null for the applicant.");
         }
 
         var model = new JobApplicationStatusViewModel
         {
+            ApplicantId = applicant.Id,
             FullName = applicant.FullName,
             JobName = applicant.Job.JobName,
-            ApplicationStatus = applicant.ApplicationStatus
+            ApplicationStatus = applicant.ApplicationStatus,
+            JobId = applicant.Job.Id
         };
 
         return View(model);

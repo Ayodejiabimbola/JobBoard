@@ -10,10 +10,8 @@ public class JobApplicationStatusViewModel
     [Display(Name = "Job Name")]
     public string JobName { get; set; } = default!;
 
-
     [Display(Name = "Application Status")]
     public ApplicationStatus ApplicationStatus { get; set; }
 
     public int JobId { get; set;}
-
 }
