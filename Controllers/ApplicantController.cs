@@ -256,7 +256,7 @@ public class ApplicantController(
 
         if (applicant == null)
         {
-            return NotFound();
+            return RedirectToAction("AddApplicant", "Applicant");
         }
 
         if (applicant.Job == null)

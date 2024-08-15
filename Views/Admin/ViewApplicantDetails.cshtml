@@ -13,7 +13,7 @@
             <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
             <p><strong>Gender:</strong> @Model.Gender</p>
             <p><strong>Job Applied For:</strong> @Model.JobName</p>
-            <p><strong>Current Status:</strong>@Model.ApplicationStatus</p>
+            <p><strong>Current Status:</strong>@Model.ApplicationStatus.GetDescription()</p>
         </div>
     </div>
 

@@ -46,3 +46,31 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+body {
+  background-image: url('~/images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #f8f9fa;
+  --text-color: #343a40;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+}

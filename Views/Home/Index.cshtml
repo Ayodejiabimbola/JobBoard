@@ -1,10 +1,12 @@
-﻿@{
+﻿
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="container mt-5">
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-        Open Menu
+     Menu
     </button>
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
@@ -17,9 +19,39 @@
                 <li class="list-group-item">
                     <a asp-controller="Applicant" asp-action="ApplicantDetail" class="text-decoration-none">Profile</a>
                 </li>
-                <li class="list-group-item">
+                @if (User.IsInRole("User"))
+                {
+                   <li class="list-group-item">
                     <a asp-controller="Applicant" asp-action="JobApplicationStatus" class="text-decoration-none">Application Status</a>
-                </li>
+                    </li>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="Admin" asp-action="ListAllApplicants" class="text-decoration-none">View Applicants</a>
+                    </li>
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="Job" asp-action="ListJobs" class="text-decoration-none">All Jobs</a>
+                    </li>
+                }
+
+                @if (User.IsInRole("User"))
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="Job" asp-action="ViewJobs" class="text-decoration-none">All Jobs</a>
+                    </li>
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="Administration" asp-action="ListRoles" class="text-decoration-none">User Roles</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>

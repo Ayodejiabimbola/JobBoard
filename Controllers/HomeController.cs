@@ -1,17 +1,13 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using JobBoard.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Controllers;
-
-public class HomeController : Controller
+[AllowAnonymous]
+public class HomeController(ILogger<HomeController> logger) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger<HomeController> _logger = logger;
 
     public IActionResult Index()
     {
@@ -19,6 +15,11 @@ public class HomeController : Controller
     }
 
     public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    public IActionResult LandingPage()
     {
         return View();
     }

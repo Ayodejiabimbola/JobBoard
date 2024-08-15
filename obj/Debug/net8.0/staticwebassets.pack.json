@@ -29,6 +29,14 @@
       "PackagePath": "staticwebassets\\images\\it_support_specialist.jpeg"
     },
     {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\landing_page.jpg",
+      "PackagePath": "staticwebassets\\images\\landing_page.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\landingpage_background_photo.avif",
+      "PackagePath": "staticwebassets\\images\\landingpage_background_photo.avif"
+    },
+    {
       "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\images\\network_engineer.jpeg",
       "PackagePath": "staticwebassets\\images\\network_engineer.jpeg"
     },
@@ -293,8 +301,24 @@
       "PackagePath": "staticwebassets\\uploads\\Of course_emr4554g.4c3.docx"
     },
     {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Of course_jj5yjdao.ttu.docx",
+      "PackagePath": "staticwebassets\\uploads\\Of course_jj5yjdao.ttu.docx"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Portal Guide_1nbrtqzq.gpl.pdf",
+      "PackagePath": "staticwebassets\\uploads\\Portal Guide_1nbrtqzq.gpl.pdf"
+    },
+    {
       "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Portal Guide_2rexdihk.svj.pdf",
       "PackagePath": "staticwebassets\\uploads\\Portal Guide_2rexdihk.svj.pdf"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Portal Guide_4bs11xzo.zzq.pdf",
+      "PackagePath": "staticwebassets\\uploads\\Portal Guide_4bs11xzo.zzq.pdf"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Tutor Support and Tickets_2p3s30f5.3fk.pdf",
+      "PackagePath": "staticwebassets\\uploads\\Tutor Support and Tickets_2p3s30f5.3fk.pdf"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.JobBoard.Microsoft.AspNetCore.StaticWebAssets.props",

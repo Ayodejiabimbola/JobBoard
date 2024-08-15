@@ -1,10 +1,12 @@
 using AspNetCoreHero.ToastNotification.Abstractions;
 using JobBoard.Context;
 using JobBoard.Models.Applicant;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+[Authorize(Roles = "Admin")]
 public class AdminController(
     UserManager<IdentityUser> userManager,
     SignInManager<IdentityUser> signInManager,
@@ -24,13 +26,12 @@ public class AdminController(
     }
 
     [HttpGet]
+    [Route("Admin/ViewApplicantDetails/{applicantId}")]
     public async Task<IActionResult> ViewApplicantDetails(int applicantId)
     {
-        var currentUserId = _userManager.GetUserId(User);
-
         var applicant = await _jobBoardDbContext.Applicants
             .Include(a => a.Job)
-            .FirstOrDefaultAsync(a => a.UserId == currentUserId);
+            .FirstOrDefaultAsync(a => a.Id == applicantId);
 
         if (applicant == null)
         {

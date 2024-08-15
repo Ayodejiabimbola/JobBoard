@@ -13,12 +13,14 @@ namespace JobBoard.Controllers;
 public class AuthController(
     UserManager<IdentityUser> userManager,
     SignInManager<IdentityUser> signInManager,
+    RoleManager<IdentityRole> roleManager,
     INotyfService notyf,
     JobBoardDbContext jobBoardDbContext,
     IHttpContextAccessor httpContextAccessor) : Controller
 {
     private readonly UserManager<IdentityUser> _userManager = userManager;
     private readonly SignInManager<IdentityUser> _signInManager = signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
     private readonly INotyfService _notyfService = notyf;
     private readonly JobBoardDbContext _jobBoardDbContext = jobBoardDbContext;
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
@@ -70,41 +72,50 @@ public class AuthController(
     }
 
     [HttpPost]
-    [AllowAnonymous]
-    public async Task<IActionResult> Register(RegisterViewModel model)
+[AllowAnonymous]
+public async Task<IActionResult> Register(RegisterViewModel model)
+{
+    if (ModelState.IsValid)
     {
-        if (ModelState.IsValid)
+        var existingUser = await _userManager.Users
+            .SingleOrDefaultAsync(u => u.Email == model.Email || u.UserName == model.Username);
+
+        if (existingUser != null)
         {
-            var existingUser = await _userManager.Users.SingleOrDefaultAsync(u => u.Email == model.Email || u.UserName == model.Username);
+            _notyfService.Warning("User already exists!");
+            return View();
+        }
 
-            if (existingUser != null)
+        var user = new IdentityUser
+        {
+            UserName = model.Username,
+            Email = model.Email
+        };
+
+        var result = await _userManager.CreateAsync(user, model.Password);
+
+        if (result.Succeeded)
+        {
+            const string userRole = "User"; 
+
+            if (!await _roleManager.RoleExistsAsync(userRole))
             {
-                _notyfService.Warning("User already exist!");
-                return View();
+                await _roleManager.CreateAsync(new IdentityRole(userRole));
             }
-
-            var user = new IdentityUser
-            {
-                UserName = model.Username,
-                Email = model.Email
-            };
-
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
-            {
-                _notyfService.Error("An error occured while registering user!");
-                return View();
-            }
+            await _userManager.AddToRoleAsync(user, userRole);
 
             _notyfService.Success("Registration was successful");
             await _signInManager.SignInAsync(user, isPersistent: false);
             return RedirectToAction("Index", "Home");
         }
 
-        return View(model);
+        _notyfService.Error("An error occurred while registering the user!");
+        return View();
     }
 
+    return View(model);
+}
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Logout()
     {

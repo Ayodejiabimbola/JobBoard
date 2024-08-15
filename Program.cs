@@ -66,6 +66,6 @@ app.UseNotyf();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Job}/{action=ViewJobs}/{id?}");
+    pattern: "{controller=Home}/{action=LandingPage}");
 
 app.Run();
