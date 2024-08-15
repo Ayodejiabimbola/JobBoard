@@ -15,6 +15,7 @@
             <th>Date of Birth</th>
             <th>Gender</th>
             <th>Application Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -24,11 +25,11 @@
                 <td>@applicant.FullName</td>
                 <td>@applicant.Email</td>
                 <td>@applicant.PhoneNumber</td>
-                <td>@applicant.DOB.ToString("dd/MM/yyyy")  </td>
+                <td>@applicant.DOB.ToString("dd/MM/yyyy")</td>
                 <td>@applicant.Gender</td>
                 <td>@applicant.ApplicationStatus</td>
-                  <td>
-                    <a asp-action="Edit" asp-route-id="@applicant.Id" class="btn btn-primary">Edit</a>
+                <td>
+                    <a asp-controller="Admin" asp-action="ViewApplicantDetails" asp-route-applicantId="@applicant.Id" class="btn btn-info">View Details</a>
                     <form asp-action="Delete" asp-route-id="@applicant.Id" method="post" class="d-inline">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>

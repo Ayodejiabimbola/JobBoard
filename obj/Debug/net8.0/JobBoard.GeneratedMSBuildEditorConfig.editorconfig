@@ -34,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRpb25cTGlzdFJvbGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/HP/Desktop/JobBoard/Views/Admin/ListAllApplicants.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTGlzdEFsbEFwcGxpY2FudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/JobBoard/Views/Admin/ViewApplicantDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld0FwcGxpY2FudERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/HP/Desktop/JobBoard/Views/Applicant/AddApplicant.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYW50XEFkZEFwcGxpY2FudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -52,10 +60,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/HP/Desktop/JobBoard/Views/Applicant/JobApplicationStatus.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYW50XEpvYkFwcGxpY2F0aW9uU3RhdHVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/HP/Desktop/JobBoard/Views/Applicant/ListAllApplicants.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYW50XExpc3RBbGxBcHBsaWNhbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/HP/Desktop/JobBoard/Views/Auth/Login.cshtml]

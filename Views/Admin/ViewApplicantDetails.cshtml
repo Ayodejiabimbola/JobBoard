@@ -1,0 +1,77 @@
+@model JobBoard.Models.Applicant.ApplicantDetailViewModel
+@{
+    ViewData["Title"] = "Applicant Details";
+}
+
+<h1>@Model.FullName's Details</h1>
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">Applicant Information</div>
+        <div class="card-body">
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+            <p><strong>Gender:</strong> @Model.Gender</p>
+            <p><strong>Job Applied For:</strong> @Model.JobName</p>
+            <p><strong>Current Status:</strong>@Model.ApplicationStatus</p>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Submitted Files</div>
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(Model.CVPath))
+            {
+                <p><strong>CV:</strong> <a href="@Url.Content(Model.CVPath)" target="_blank">View CV</a></p>
+            }
+            else
+            {
+                <p>No CV submitted.</p>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.CoverLetterPath))
+            {
+                <p><strong>Cover Letter:</strong> <a href="@Url.Content(Model.CoverLetterPath)" target="_blank">View Cover Letter</a></p>
+            }
+            else
+            {
+                <p>No Cover Letter submitted.</p>
+            }
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Update Application Status</div>
+        <div class="card-body">
+            <form asp-action="UpdateApplicationStatus" method="post">
+                <input type="hidden" asp-for="ApplicantId" />
+                <div class="mb-3">
+                    <label asp-for="ApplicationStatus" class="form-label">Change Status</label>
+                    <select asp-for="ApplicationStatus" class="form-select" required>
+                        @foreach (var status in Enum.GetValues(typeof(ApplicationStatus)).Cast<ApplicationStatus>())
+                        {
+                            <option value="@status">@status.GetDescription()</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Status</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@functions {
+    private string GetStatusBadgeClass(ApplicationStatus status)
+    {
+        return status switch
+        {
+            ApplicationStatus.Submitted => "badge-secondary",
+            ApplicationStatus.UnderReview => "badge-warning",
+            ApplicationStatus.ShortListed => "badge-info",
+            ApplicationStatus.InterviewScheduled => "badge-primary",
+            ApplicationStatus.Qualified => "badge-success",
+            ApplicationStatus.Disqualified => "badge-danger",
+            _ => "badge-light"
+        };
+    }
+}

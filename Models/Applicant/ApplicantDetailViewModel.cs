@@ -17,5 +17,14 @@ public class ApplicantDetailViewModel
 
     [Display(Name = "Gender")]
     public Gender Gender { get; set; } = default!;
+
+    [Display(Name = "Job")]
+    public string JobName { get; set; } = default!;
+
+    [Display(Name = "Application Status")]
+    public ApplicationStatus ApplicationStatus { get; set; }
     public int JobId { get; internal set; }
+
+    public string CVPath { get; set; } = default!;
+    public string CoverLetterPath { get; set; } = default!;
 }

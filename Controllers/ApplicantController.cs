@@ -24,12 +24,7 @@ public class ApplicantController(
     private readonly JobBoardDbContext _jobBoardDbContext = jobBoardDbContext;
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
-    [HttpGet]
-    public async Task<IActionResult> ListAllApplicants()
-    {
-        var applicants = await _jobBoardDbContext.Applicants.ToListAsync();
-        return View(applicants);
-    }
+    
     public IActionResult AddApplicant()
     {
         var jobs = _jobBoardDbContext.Jobs.Select(x => new SelectListItem
