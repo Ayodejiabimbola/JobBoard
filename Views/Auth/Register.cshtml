@@ -4,35 +4,39 @@
     ViewData["Title"] = "Register";
 }
 
-<h2>@ViewData["Title"]</h2>
-<hr>
-<h5>Create an account to track application status</h5>
-<form asp-action="Register">
+<h2 class="text-center mt-4">@ViewData["Title"]</h2>
+<hr class="mb-4">
+<h5 class="text-center mb-4">Create an account to track application status</h5>
 
-    <div class="mb-3">
-        <label asp-for="Username" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Username">
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input type="email" class="form-control" asp-for="Email">
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Password" class="form-label"></label>
-        <input type="password" class="form-control" asp-for="Password">
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="ConfirmPassword" class="form-label"></label>
-        <input type="password" class="form-control" asp-for="ConfirmPassword">
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <form asp-action="Register">
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label">Username</label>
+                <input type="text" class="form-control" asp-for="Username" placeholder="Enter your username">
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" asp-for="Email" placeholder="Enter your email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input type="password" class="form-control" asp-for="Password" placeholder="Enter your password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm your password">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
 
-    <button type="submit" class="btn btn-success">Register</button>
-</form>
-<div>
-    Already have an account? <a href="@Url.Action("Login", "Auth")" class="nav-link link-body-emphasis px-2">Login
-    </a>
+            <button type="submit" class="btn btn-success w-100">Register</button>
+        </form>
+        <div class="text-center mt-3">
+            Already have an account? 
+            <a href="@Url.Action("Login", "Auth")" class="link-primary">Login</a>
+        </div>
+    </div>
 </div>

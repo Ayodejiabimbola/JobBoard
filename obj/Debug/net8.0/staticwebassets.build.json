@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w/IRNMqcR+tKldfPbvSmLDWqbkOSpG4bieY4f6GTANQ=",
+  "Hash": "FsQY4cgQUyJq5/TJST/mSGtRKn5nbGkHaxc4ilEMBUw=",
   "Source": "JobBoard",
   "BasePath": "_content/JobBoard",
   "Mode": "Default",
@@ -1537,6 +1537,25 @@
       "OriginalItemSpec": "wwwroot\\uploads\\Of course_jj5yjdao.ttu.docx"
     },
     {
+      "Identity": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Of course_lq1m4xl0.jjl.docx",
+      "SourceId": "JobBoard",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\",
+      "BasePath": "_content/JobBoard",
+      "RelativePath": "uploads/Of course_lq1m4xl0.jjl.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Of course_lq1m4xl0.jjl.docx"
+    },
+    {
       "Identity": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\OHSC ASSIGNMENT COVERSHEET.doc_xmvugod4.auk.doc",
       "SourceId": "JobBoard",
       "SourceType": "Discovered",
@@ -1611,6 +1630,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Portal Guide_4bs11xzo.zzq.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Portal Guide_nr31biyj.got.pdf",
+      "SourceId": "JobBoard",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\",
+      "BasePath": "_content/JobBoard",
+      "RelativePath": "uploads/Portal Guide_nr31biyj.got.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Portal Guide_nr31biyj.got.pdf"
     },
     {
       "Identity": "C:\\Users\\HP\\Desktop\\JobBoard\\wwwroot\\uploads\\Tutor Support and Tickets_2p3s30f5.3fk.pdf",

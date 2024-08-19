@@ -53,7 +53,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: 'Roboto', sans-serif;
-  background-color: var(--background-color);
+  background: color #f2f2f2;
   color: var(--text-color);
 }
 
@@ -73,4 +73,22 @@ body {
 
 .btn-primary {
   background-color: var(--primary-color);
+}
+
+/* Position the profile icon */
+.profile-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: #007bff; /* Adjust the color as needed */
+}
+
+.profile-icon a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.profile-icon a:hover {
+  color: #0056b3; /* Adjust hover color if needed */
 }

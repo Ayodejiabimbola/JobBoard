@@ -26,8 +26,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opt =>
 
 builder.Services.AddMvc(options => {
     var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
+            .RequireAuthenticatedUser()
+            .Build();
     options.Filters.Add(new AuthorizeFilter(policy));
 }).AddXmlSerializerFormatters();
 

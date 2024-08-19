@@ -60,6 +60,44 @@ public class AdminController(
         return View(model);
     }
 
+    [HttpGet]
+    [Route("Files/DownloadFile")]
+    public async Task<IActionResult> DownloadFile(int applicantId, string fileType)
+    {
+        var applicant = await _jobBoardDbContext.Applicants
+            .FirstOrDefaultAsync(a => a.Id == applicantId);
+
+        if (applicant == null)
+        {
+            return NotFound();
+        }
+
+        string filePath = fileType == "CV" ? applicant.CVPath : applicant.CoverLetterPath;
+
+        if (string.IsNullOrEmpty(filePath) || !System.IO.File.Exists(filePath))
+        {
+            return NotFound();
+        }
+
+        var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+        var fileName = Path.GetFileName(filePath);
+        var contentType = "application/octet-stream"; // Default content type
+
+        // Determine content type based on file extension
+        switch (Path.GetExtension(fileName).ToLower())
+        {
+            case ".pdf":
+                contentType = "application/pdf";
+                break;
+            case ".doc":
+            case ".docx":
+                contentType = "application/msword";
+                break;
+        }
+
+        return File(fileBytes, contentType, fileName);
+    }
+
     [HttpPost]
     public async Task<IActionResult> UpdateApplicationStatus(ApplicantDetailViewModel model)
     {

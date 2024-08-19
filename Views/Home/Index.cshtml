@@ -1,12 +1,247 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
 
-@{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .profile-icon {
+            position: absolute;
+            bottom: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            font-size: 24px;
+            color: #007bff;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+
+        .profile-icon a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .profile-icon a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+            Menu
+        </button>
+            <div class="profile-icon">
+                <a href="@Url.Action("ApplicantDetail", "Applicant")">
+                    <i class="fas fa-user"></i> <!-- Font Awesome Profile Icon -->
+                </a>
+            </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a asp-controller="Applicant" asp-action="ApplicantDetail" class="text-decoration-none">Profile</a>
+                    </li>
+                    @if (User.IsInRole("User"))
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Applicant" asp-action="JobApplicationStatus" class="text-decoration-none">Application Status</a>
+                        </li>
+                    }
+                    
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Admin" asp-action="ListAllApplicants" class="text-decoration-none">View Applicants</a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Job" asp-action="ListJobs" class="text-decoration-none">All Jobs</a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("User"))
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Job" asp-action="ViewJobs" class="text-decoration-none">All Jobs</a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Administration" asp-action="ListRoles" class="text-decoration-none">User Roles</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @if(User.IsInRole("Admin"))
+    {
+        <div class="container">
+            <p class="lead"></p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">View Applicants</h5>
+                            <p class="card-text">Manage and review all applicants.</p>
+                            <a href="@Url.Action("ListAllApplicants", "Admin")" class="btn btn-primary">Go to Applicants</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Jobs</h5>
+                            <p class="card-text">Create, update, or remove job postings.</p>
+                            <a href="@Url.Action("ListJobs", "Job")" class="btn btn-success">Go to Jobs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">User Roles</h5>
+                            <p class="card-text">Assign roles and manage user permissions.</p>
+                            <a href="@Url.Action("ListRoles", "Administration")" class="btn btn-warning">Manage User Roles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Reports</h5>
+                            <p class="card-text">View and generate reports on job applications.</p>
+                            <a href="@Url.Action("Reports", "Admin")" class="btn btn-info">View Reports</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Settings</h5>
+                            <p class="card-text">Configure system settings and preferences.</p>
+                            <a href="@Url.Action("Settings", "Admin")" class="btn btn-secondary">Go to Settings</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Logout</h5>
+                            <p class="card-text">End your session.</p>
+                            <form method="post" asp-action="Logout" asp-controller="Auth">
+                                <button type="submit" class="btn btn-danger" style="width: auto;">
+                                    Logout 
+                                    @* @User.Identity!.Name *@
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container mt-5">
+            <div class="jumbotron text-center">
+                <h1 class="display-4">Welcome to Our Job Board!</h1>
+                <p class="lead">Find your dream job or manage your applications effortlessly.</p>
+                <hr class="my-4">
+                <p>Your journey to a new career starts here.</p>
+                <a class="btn btn-primary btn-lg" href="@Url.Action("ViewJobs", "Job")" role="button">Available Jobs</a>
+            </div>
+
+            <div class="row text-center mt-5">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">View Application Status</h5>
+                            <p class="card-text">Track the status of your job applications.</p>
+                            <a href="@Url.Action("JobApplicationStatus", "Applicant")" class="btn btn-outline-primary">Go to Application status</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Update Profile</h5>
+                            <p class="card-text">Keep your profile information up-to-date.</p>
+                            <a href="@Url.Action("EditApplicantDetail", "Applicant")" class="btn btn-outline-primary">Update Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Job Alerts</h5>
+                            <p class="card-text">Set up alerts for new job postings.</p>
+                            <a href="@Url.Action("ManageAlerts", "Jobs")" class="btn btn-outline-primary">Manage Alerts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3 class="mb-4">Featured Jobs</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Software Engineer</h5>
+                                <p class="card-text">Company</p>
+                                <p class="card-text"><small class="text-muted"></small></p>
+                                <a href="@Url.Action("JobDetails", "Job", new { id = 1 })" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+@* @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="container mt-5">
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-     Menu
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"
+        aria-controls="offcanvasMenu">
+        Menu
     </button>
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
@@ -21,14 +256,17 @@
                 </li>
                 @if (User.IsInRole("User"))
                 {
-                   <li class="list-group-item">
-                    <a asp-controller="Applicant" asp-action="JobApplicationStatus" class="text-decoration-none">Application Status</a>
+                    <li class="list-group-item">
+                        <a asp-controller="Applicant" asp-action="JobApplicationStatus"
+                            class="text-decoration-none">Application Status</a>
                     </li>
                 }
+                
                 @if (User.IsInRole("Admin"))
                 {
                     <li class="list-group-item">
-                        <a asp-controller="Admin" asp-action="ListAllApplicants" class="text-decoration-none">View Applicants</a>
+                        <a asp-controller="Admin" asp-action="ListAllApplicants" class="text-decoration-none">View
+                            Applicants</a>
                     </li>
                 }
 
@@ -49,10 +287,150 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <li class="list-group-item">
-                        <a asp-controller="Administration" asp-action="ListRoles" class="text-decoration-none">User Roles</a>
+                        <a asp-controller="Administration" asp-action="ListRoles" class="text-decoration-none">User
+                            Roles</a>
                     </li>
                 }
             </ul>
         </div>
     </div>
 </div>
+
+@if(User.IsInRole("Admin"))
+{
+    <div class="container">
+        <p class="lead"></p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Applicants</h5>
+                        <p class="card-text">Manage and review all applicants.</p>
+                        <a href="@Url.Action("ListAllApplicants", "Admin")" class="btn btn-primary">Go to Applicants</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Manage Jobs</h5>
+                        <p class="card-text">Create, update, or remove job postings.</p>
+                        <a href="@Url.Action("ListJobs", "Job")" class="btn btn-success">Go to Jobs</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User Roles</h5>
+                        <p class="card-text">Assign roles and manage user permissions.</p>
+                        <a href="@Url.Action("ListRoles", "Administration")" class="btn btn-warning">Manage User Roles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Reports</h5>
+                        <p class="card-text">View and generate reports on job applications.</p>
+                        <a href="@Url.Action("Reports", "Admin")" class="btn btn-info">View Reports</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Settings</h5>
+                        <p class="card-text">Configure system settings and preferences.</p>
+                        <a href="@Url.Action("Settings", "Admin")" class="btn btn-secondary">Go to Settings</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Logout</h5>
+                        <p class="card-text">End your session.</p>
+                        <form method="post" asp-action="Logout" asp-controller="Auth">
+                            <button type="submit" class="btn btn-danger" 
+                                    style="width: auto;">
+                                Logout 
+                                @* @User.Identity!.Name 
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Welcome to Our Job Board!</h1>
+            <p class="lead">Find your dream job or manage your applications effortlessly.</p>
+            <hr class="my-4">
+            <p>Your journey to a new career starts here.</p>
+            <a class="btn btn-primary btn-lg" href="@Url.Action("ViewJobs", "Job")" role="button">Available Jobs</a>
+        </div>
+
+        <div class="row text-center mt-5">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">View Application Status</h5>
+                        <p class="card-text">Track the status of your job applications.</p>
+                        <a href="@Url.Action("JobApplicationStatus", "Applicant")" class="btn btn-outline-primary">Go to
+                            Application status</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Update Profile</h5>
+                        <p class="card-text">Keep your profile information up-to-date.</p>
+                        <a href="@Url.Action("EditApplicantDetail", "Applicant")" class="btn btn-outline-primary">Update
+                            Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Job Alerts</h5>
+                        <p class="card-text">Set up alerts for new job postings.</p>
+                        <a href="@Url.Action("ManageAlerts", "Jobs")" class="btn btn-outline-primary">Manage Alerts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3 class="mb-4">Featured Jobs</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Software Engineer</h5>
+                            <p class="card-text">Company</p>
+                            <p class="card-text"><small class="text-muted"></small></p>
+                            <a href="@Url.Action("JobDetails", "Job", new { id = 1 })" class="btn btn-primary">View
+                                Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+} *@

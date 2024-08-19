@@ -4,11 +4,10 @@ using JobBoard.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Controllers;
-[AllowAnonymous]
 public class HomeController(ILogger<HomeController> logger) : Controller
 {
     private readonly ILogger<HomeController> _logger = logger;
-
+    [Authorize]
     public IActionResult Index()
     {
         return View();
@@ -19,10 +18,16 @@ public class HomeController(ILogger<HomeController> logger) : Controller
         return View();
     }
 
+    [AllowAnonymous]
     public IActionResult LandingPage()
     {
+        if (User.Identity!.IsAuthenticated)
+        {
+            return RedirectToAction("Index", "Home");
+        }
         return View();
     }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

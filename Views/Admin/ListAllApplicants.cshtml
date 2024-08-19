@@ -29,12 +29,16 @@
                 <td>@applicant.Gender</td>
                 <td>@applicant.ApplicationStatus.GetDescription()</td>
                 <td>
-                    <a asp-controller="Admin" asp-action="ViewApplicantDetails" asp-route-applicantId="@applicant.Id" class="btn btn-info">View Details</a>
-                    <a>
-                        <form asp-action="Delete" asp-route-id="@applicant.Id" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </a>
+                    <div class="d-flex align-items-center">
+                        <a asp-controller="Admin" asp-action="ViewApplicantDetails" asp-route-applicantId="@applicant.Id"
+                            class="btn btn-info me-2 text-nowrap">
+                            View Details
+                        </a>
+                        <a asp-controller="Applicant" asp-action="DeleteApplicant" asp-route-Id="@applicant.Id"
+                            class="btn btn-danger text-nowrap">
+                            Delete
+                        </a>
+                    </div>
                 </td>
             </tr>
         }

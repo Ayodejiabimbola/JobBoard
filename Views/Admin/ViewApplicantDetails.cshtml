@@ -17,12 +17,19 @@
         </div>
     </div>
 
+    <div class="container">
     <div class="card mb-3">
         <div class="card-header">Submitted Files</div>
         <div class="card-body">
             @if (!string.IsNullOrEmpty(Model.CVPath))
             {
-                <p><strong>CV:</strong> <a href="@Url.Content(Model.CVPath)" target="_blank">View CV</a></p>
+                <p>
+                    <strong>CV:</strong> 
+                    <a href="@Url.Action("DownloadFile", "Files", new { applicantId = Model.ApplicantId, fileType = "CV" })"
+                       class="btn btn-primary btn-sm">
+                        <i class="bi bi-file-earmark-pdf"></i> Download CV
+                    </a>
+                </p>
             }
             else
             {
@@ -31,7 +38,13 @@
 
             @if (!string.IsNullOrEmpty(Model.CoverLetterPath))
             {
-                <p><strong>Cover Letter:</strong> <a href="@Url.Content(Model.CoverLetterPath)" target="_blank">View Cover Letter</a></p>
+                <p>
+                    <strong>Cover Letter:</strong> 
+                    <a href="@Url.Action("DownloadFile", "Files", new { applicantId = Model.ApplicantId, fileType = "CoverLetter" })"
+                       class="btn btn-secondary btn-sm">
+                        <i class="bi bi-file-earmark-text"></i> Download Cover Letter
+                    </a>
+                </p>
             }
             else
             {
@@ -39,6 +52,7 @@
             }
         </div>
     </div>
+</div>
 
     <div class="card mb-3">
         <div class="card-header">Update Application Status</div>
